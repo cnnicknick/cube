@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正方体</title>
+    <style>
+        body{
+            background: url("images/back.jpeg");
+        }
+        img{
+            width:100%;height:100%;
+        }
+        .sence{
+            width:200px;height:200px;margin:50px auto;padding:200px;perspective:800px; -webkit-perspective:800px;
+        }
+        .box{
+            width:200px;height:200px;
+            transform-style:preserve-3d;
+            position:relative;
+            transform-origin:center center 100px;
+        }
+        .mian{
+            width:200px;height:200px;
+            position: absolute;top:0;left:0;/*让六张图片重叠摆放，不加则一行一张图片*/
+        }
+        .mian:nth-child(1){
+            transform: rotateX(90deg);/*x轴方向看，顺时针为正*/
+            transform-origin: top;
+        }
+        .mian:nth-child(2){
+            transform: rotateX(-90deg);/*y轴正方向向下，与数学中坐标轴相反*/
+            transform-origin: bottom;
+        }
+        .mian:nth-child(3){
+            transform: rotateY(-90deg);
+            transform-origin: left;
+        }
+        .mian:nth-child(4){
+            transform: rotateY(180deg);
+            /*transform-origin: center;*/
+        }
+        .mian:nth-child(5){
+		    transform: rotateY(90deg);
+            transform-origin: right;
+        }
+        .mian:nth-child(6){
+            transform: translateZ(200px);
+            /*transform-origin: top;*/
+        }
+    </style>
+    <script src="jquery-1.11.3.js"></script>
+    <script>
+        $(function(){
+            var cx=$('.box').offset().left-$('.box').width()/2;//591.5
+            var cy=$('.box').offset().top-$('.box').height()/2;//150
+            $(document).mousemove(function(e){
+                var px= e.pageX-cx;
+                var py= e.pageY-cy;
+                var pz= 0;
+                var m=Math.sqrt(px*px+py*py);
+                $('.box').css({transform:'rotate3d('+px+','+py+','+pz+','+m+'deg)'});
+ 
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="sence">
+        <div class="box">
+            <div class="mian"><img src="images/aa.jpg"></div>
+            <div class="mian"><img src="images/bb.png"></div>
+            <div class="mian"><img src="images/cc.jpg"></div>
+            <div class="mian"><img src="images/dd.jpg"></div>
+            <div class="mian"><img src="images/ee.jpg"></div>
+            <div class="mian"><img src="images/ff.jpg"></div>
+        </div>
+    </div>
+
+
+
+	<script>
+	    //舞台-》容器-》图片
+		//perspective:800px;-》transform-style:preserve-3d;-》position: absolute;
+	</script>
+</body>
+</html>
